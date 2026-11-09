@@ -268,10 +268,11 @@ footer{padding-block:32px 48px;display:flex;justify-content:space-between;gap:16
   <div class="sh"><h2>What I'm building now</h2><p>Public projects built like production systems: real auth, real failure handling, load-tested, with the design docs published. Status is updated as each one ships.</p></div>
   <div class="builds">
     <article class="build lead">
-      <span class="pill on">In design</span>
+      <span class="pill on">In progress · live demo</span>
       <h3>TicketRush</h3>
       <p>Event ticketing built for the worst five minutes: a ticket drop where thousands of people pay at once.</p>
       <ul><li>Seat holds in Redis so two people can't buy the same seat</li><li>Idempotent payments; a gateway crash never double-charges</li><li>Webhook reconciler that refunds any orphaned charge</li><li>Load test target: 10k virtual users, 3k concurrent checkouts</li></ul>
+      <p style="display:flex;gap:16px;flex-wrap:wrap;margin-top:6px"><a href="https://ticketrush-ten.vercel.app" target="_blank" rel="noopener" style="font-weight:600;color:var(--signal-ink)">Live demo ↗</a><a href="https://github.com/EsheetVivek/TicketRush" target="_blank" rel="noopener" style="font-weight:600;color:var(--signal-ink)">Code &amp; design docs ↗</a></p>
     </article>
     <article class="build">
       <span class="pill">Planned</span>
