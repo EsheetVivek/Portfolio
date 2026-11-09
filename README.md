@@ -1,2 +1,3 @@
-# Portfolio
-Showcasing my skills and knowledge based on my experiences
+# Esheet Vivek — portfolio
+Static site deployed on Vercel. Security headers live in `vercel.json`.
+Improvements are tracked in `BACKLOG.md` and `CHANGELOG.md`.

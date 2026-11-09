@@ -1,0 +1,344 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Esheet Vivek</title>
+<meta name="description" content="Esheet Vivek — product-minded design engineer. Case studies in product, UI/UX, frontend and system design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an engineer's notebook — oversized type, a live system diagram as the hero, work as numbered "builds" in a two-column ledger. */
+:root{
+  --bg:#F5F6F8; --surface:#FFFFFF; --ink:#0E1116; --soft:#59616E; --rule:#DCE0E6;
+  --signal:#F2541B; --signal-ink:#B83A0C; --wire:#1E6BFF; --tint:#FFF1EB;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Geist","Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C0F14; --surface:#141922; --ink:#ECEFF4; --soft:#9AA3B2; --rule:#252C38;
+  --signal:#FF6A33; --signal-ink:#FF8C61; --wire:#5B92FF; --tint:#2A1810; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C0F14; --surface:#141922; --ink:#ECEFF4; --soft:#9AA3B2; --rule:#252C38;
+  --signal:#FF6A33; --signal-ink:#FF8C61; --wire:#5B92FF; --tint:#2A1810; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.02em}
+.k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.mark{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none}
+.mark i{width:10px;height:10px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px var(--tint)}
+.top nav{display:flex;gap:22px;font-size:14px;font-weight:500}
+.top nav a{text-decoration:none;color:var(--soft)}
+.top nav a:hover{color:var(--ink)}
+@media (max-width:640px){.top nav a:not(.go){display:none}}
+.go{color:var(--ink)!important;border:1px solid var(--rule);padding:6px 12px;border-radius:999px;background:var(--surface)}
+
+/* hero */
+.hero{padding-block:72px 40px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;padding:7px 12px;border:1px solid var(--rule);border-radius:999px;background:var(--surface)}
+.status b{width:8px;height:8px;border-radius:50%;background:#22A06B;box-shadow:0 0 0 0 rgba(34,160,107,.5);animation:ping 2.4s infinite}
+.hero h1{font-size:clamp(46px,7.2vw,92px);line-height:.95;font-weight:800;margin:22px 0 22px}
+.hero h1 span{color:var(--signal)}
+.lede{font-size:clamp(17px,1.6vw,19px);color:var(--soft);max-width:33em;margin:0 0 28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.chips span{font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--rule)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.main{background:var(--ink);color:var(--bg)}
+.btn.alt{border:1px solid var(--rule);background:var(--surface)}
+
+/* system diagram */
+.sys{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:18px 18px 14px;position:relative;overflow:hidden}
+.sys header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.sys svg{width:100%;height:auto;display:block}
+.sys .node rect{fill:var(--bg);stroke:var(--rule);stroke-width:1.2}
+.sys .node.hot rect{fill:var(--tint);stroke:var(--signal)}
+.sys text{font-family:var(--mono);font-size:11px;fill:var(--ink)}
+.sys text.sub{fill:var(--soft);font-size:9.5px}
+.sys path.w{fill:none;stroke:var(--rule);stroke-width:1.5}
+.sys circle.pkt{fill:var(--wire)}
+.sys circle.pkt.s{fill:var(--signal)}
+.sys .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--soft);margin-top:6px}
+.sys .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* stat strip */
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-block:24px 0}
+.strip div{padding:22px 18px;border-left:1px solid var(--rule)}
+.strip div:first-child{border-left:0;padding-left:0}
+.strip b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1;font-variant-numeric:tabular-nums}
+.strip span{font-size:13.5px;color:var(--soft)}
+
+/* section heads */
+section{padding-block:96px 24px}
+.sh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:44px}
+.sh h2{font-size:clamp(34px,5vw,60px);font-weight:800;line-height:1}
+.sh p{color:var(--soft);margin:0;max-width:34em;justify-self:end}
+
+/* work ledger */
+.ledger{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+.item{display:grid;grid-template-columns:76px minmax(0,1.1fr) minmax(0,1fr);gap:28px;padding:34px 0;border-bottom:1px solid var(--rule)}
+.num{font-family:var(--mono);font-size:13px;color:var(--signal-ink);padding-top:6px}
+.item h3{font-size:clamp(23px,2.5vw,30px);font-weight:700;line-height:1.12;margin:6px 0 10px}
+.item .ctx{font-size:14px;color:var(--soft);margin-bottom:14px}
+.item p{margin:0 0 10px;max-width:58ch}
+.item p strong{font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tags span{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:5px;background:var(--surface);border:1px solid var(--rule);color:var(--soft)}
+.res{display:grid;gap:12px;align-content:start;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:20px}
+.res .k{margin-bottom:2px}
+.res div{display:flex;align-items:baseline;gap:14px;border-bottom:1px dashed var(--rule);padding-bottom:12px}
+.res div:last-child{border-bottom:0;padding-bottom:0}
+.res b{font-family:var(--display);font-size:32px;font-weight:700;line-height:1;min-width:3.6ch;color:var(--ink);font-variant-numeric:tabular-nums}
+.res span{font-size:14px;color:var(--soft)}
+
+/* building */
+.builds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.build{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.build.lead{border-color:var(--signal);box-shadow:0 0 0 4px var(--tint)}
+.pill{align-self:flex-start;font-family:var(--mono);font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--rule);color:var(--soft)}
+.pill.on{border-color:var(--signal);color:var(--signal-ink);background:var(--tint)}
+.build h3{font-size:24px;font-weight:700}
+.build p{margin:0;color:var(--soft);font-size:15px}
+.build ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
+.build li{display:grid;grid-template-columns:16px 1fr;gap:8px}
+.build li::before{content:"";width:7px;height:7px;margin-top:8px;border-radius:2px;background:var(--wire)}
+
+/* approach */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:var(--surface)}
+.flow div{padding:26px 22px;border-left:1px solid var(--rule)}
+.flow div:first-child{border-left:0}
+.flow .k{color:var(--signal-ink)}
+.flow h3{font-size:21px;margin:10px 0 8px}
+.flow p{margin:0;color:var(--soft);font-size:14.5px}
+
+/* experience + skills */
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:56px}
+.xp article{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.xp .when{font-family:var(--mono);font-size:12.5px;color:var(--soft);font-variant-numeric:tabular-nums;padding-top:4px}
+.xp h3{font-size:20px;font-weight:700}
+.xp p{margin:4px 0 0;color:var(--soft);font-size:15px}
+.kit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 28px}
+.kit h4{margin:0 0 8px;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.kit p{margin:0;font-size:15px}
+
+/* contact */
+.cta{margin-block:96px 0;background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end}
+.cta h2{font-size:clamp(36px,5.6vw,70px);font-weight:800;line-height:.98}
+.cta h2 span{color:var(--signal)}
+.cta p{opacity:.72;margin:16px 0 0;max-width:30em}
+.cl{display:flex;flex-direction:column}
+.cl .r{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--bg) 18%,transparent);flex-wrap:wrap}
+.cl .r span,.cl .r a{font-family:var(--mono);font-size:14.5px;word-break:break-all;user-select:all;text-decoration:none}
+.cl .r a:hover{color:var(--signal)}
+.copy{background:transparent;color:var(--bg);border:1px solid color-mix(in srgb,var(--bg) 35%,transparent);border-radius:999px;font:500 12px var(--mono);padding:6px 12px;cursor:pointer}
+footer{padding-block:32px 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--soft);font-size:13.5px}
+
+@media (max-width:920px){
+  .hero,.sh,.two,.cta{grid-template-columns:minmax(0,1fr)}
+  .sh p{justify-self:start}
+  .item{grid-template-columns:48px minmax(0,1fr)}
+  .item .res{grid-column:2}
+  .builds{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow div:nth-child(3){border-left:0}
+  .flow div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .strip div:nth-child(3){border-left:0;padding-left:0}
+  .strip div:nth-child(n+3){border-top:1px solid var(--rule)}
+}
+@media (max-width:520px){
+  .item{grid-template-columns:minmax(0,1fr)}
+  .item .res{grid-column:1}
+  .flow,.kit{grid-template-columns:minmax(0,1fr)}
+  .flow div{border-left:0!important;border-top:1px solid var(--rule)}
+  .flow div:first-child{border-top:0}
+  .xp article{grid-template-columns:minmax(0,1fr);gap:4px}
+  .hero{padding-block:44px 24px}
+}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(34,160,107,.45)}70%{box-shadow:0 0 0 8px rgba(34,160,107,0)}100%{box-shadow:0 0 0 0 rgba(34,160,107,0)}}
+@media (prefers-reduced-motion:reduce){.status b{animation:none}.sys .pkt{display:none}}
+</style>
+</head><body>
+
+<header class="top"><div class="wrap">
+  <a class="mark" href="#top"><i></i>Esheet Vivek</a>
+  <nav aria-label="Sections"><a href="#work">Work</a><a href="#building">Building</a><a href="#approach">Approach</a><a href="#experience">Experience</a><a class="go" href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="status"><b></b>Open to remote roles · IST, overlaps US &amp; EU</div>
+      <h1>Product thinking. Design sense. <span>Systems that hold.</span></h1>
+      <p class="lede">I'm a design engineer with 3+ years on enterprise, procurement and analytics products. I find where users get stuck, design the clearer path, and build it so it stays fast and secure under real load.</p>
+      <div class="chips" aria-label="Roles I'm open to"><span>Associate PM</span><span>Design Engineer</span><span>Product / UI-UX</span><span>Frontend</span></div>
+      <div class="ctas"><a class="btn main" href="#work">See the work →</a><a class="btn alt" href="#building">What I'm building</a></div>
+    </div>
+
+    <figure class="sys" aria-label="Diagram of the checkout architecture I'm building: client, edge, API, Redis inventory holds, a payment queue, Postgres and a payment gateway with webhook reconciliation">
+      <header><span class="k">Now building · TicketRush checkout</span><span class="k" style="color:var(--signal-ink)">design</span></header>
+      <svg viewBox="0 0 440 300" role="img">
+        <g class="node"><rect x="10" y="126" width="70" height="44" rx="8"/><text x="45" y="146" text-anchor="middle">Client</text><text class="sub" x="45" y="160" text-anchor="middle">Next.js</text></g>
+        <g class="node"><rect x="110" y="126" width="74" height="44" rx="8"/><text x="147" y="146" text-anchor="middle">Edge</text><text class="sub" x="147" y="160" text-anchor="middle">WAF · rate limit</text></g>
+        <g class="node hot"><rect x="214" y="126" width="74" height="44" rx="8"/><text x="251" y="146" text-anchor="middle">API</text><text class="sub" x="251" y="160" text-anchor="middle">idempotency</text></g>
+        <g class="node"><rect x="214" y="30" width="74" height="44" rx="8"/><text x="251" y="50" text-anchor="middle">Redis</text><text class="sub" x="251" y="64" text-anchor="middle">seat holds</text></g>
+        <g class="node"><rect x="214" y="222" width="74" height="44" rx="8"/><text x="251" y="242" text-anchor="middle">Postgres</text><text class="sub" x="251" y="256" text-anchor="middle">ledger</text></g>
+        <g class="node"><rect x="320" y="126" width="74" height="44" rx="8"/><text x="357" y="146" text-anchor="middle">Queue</text><text class="sub" x="357" y="160" text-anchor="middle">retries</text></g>
+        <g class="node hot"><rect x="320" y="30" width="110" height="44" rx="8"/><text x="375" y="50" text-anchor="middle">Payment gateway</text><text class="sub" x="375" y="64" text-anchor="middle">test mode</text></g>
+        <g class="node"><rect x="320" y="222" width="110" height="44" rx="8"/><text x="375" y="242" text-anchor="middle">Reconciler</text><text class="sub" x="375" y="256" text-anchor="middle">auto-refunds</text></g>
+        <path class="w" id="p1" d="M80 148 H110"/><path class="w" id="p2" d="M184 148 H214"/>
+        <path class="w" id="p3" d="M251 126 V74"/><path class="w" id="p4" d="M251 170 V222"/>
+        <path class="w" id="p5" d="M288 148 H320"/><path class="w" id="p6" d="M357 126 V74"/>
+        <path class="w" id="p7" d="M375 74 C410 120 410 180 375 222"/><path class="w" id="p8" d="M320 244 H288"/>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.2s" begin=".5s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.6s" begin=".9s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion></circle>
+        <circle class="pkt s" r="3.4"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"><mpath href="#p6"/></animateMotion></circle>
+        <circle class="pkt s" r="3.4"><animateMotion dur="3.4s" begin="2s" repeatCount="indefinite"><mpath href="#p7"/></animateMotion></circle>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.4s" begin="2.4s" repeatCount="indefinite"><mpath href="#p8"/></animateMotion></circle>
+        <circle class="pkt" r="3.4"><animateMotion dur="2.6s" begin="1.4s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
+      </svg>
+      <div class="legend"><span><i style="background:var(--wire)"></i>request path</span><span><i style="background:var(--signal)"></i>money path</span><span>target · 10k virtual users, 3k concurrent payments</span></div>
+    </figure>
+  </div>
+
+  <div class="strip">
+    <div><b>3+ yrs</b><span>product engineering</span></div>
+    <div><b>50k+</b><span>users on interfaces I built</span></div>
+    <div><b>−15%</b><span>support tickets after a redesign</span></div>
+    <div><b>~30%</b><span>faster UI delivery via shared components</span></div>
+  </div>
+</div>
+
+<section id="work"><div class="wrap">
+  <div class="sh"><h2>Work that shipped</h2><p>Client work is under NDA, so these are written as case studies. Every number is from the real project.</p></div>
+  <div class="ledger">
+    <article class="item">
+      <div class="num">01</div>
+      <div>
+        <div class="k">AgileAptSolutions · ProcurEngine · 2024</div>
+        <h3>Rebuilding a procurement product people kept calling support about</h3>
+        <div class="ctx">UI Developer · flows, React rebuild, API contracts</div>
+        <p><strong>Problem.</strong> A legacy jQuery product with slow pages and procurement flows that broke on mobile. The same steps kept generating tickets.</p>
+        <p><strong>What I did.</strong> Rebuilt 20+ pages in React, reworked core flows end to end for mobile, and shipped 5 new modules from shared Swagger contracts. We fixed the ticket-heavy steps first instead of rebuilding page by page.</p>
+        <div class="tags"><span>React</span><span>Swagger</span><span>Mobile UX</span><span>Performance</span></div>
+      </div>
+      <div class="res"><div class="k">Outcome</div><div><b>−15%</b><span>support tickets</span></div><div><b>~40%</b><span>faster first paint</span></div><div><b>5</b><span>modules ahead of roadmap</span></div></div>
+    </article>
+    <article class="item">
+      <div class="num">02</div>
+      <div>
+        <div class="k">Accenture · 2025 – present</div>
+        <h3>One component system for three internal products</h3>
+        <div class="ctx">Associate Software Engineer · frontend / UI · 8+ person squad</div>
+        <p><strong>Problem.</strong> Three products built the same UI separately, each slightly different, each re-solving accessibility.</p>
+        <p><strong>What I did.</strong> Built 10+ reusable React + TypeScript libraries with accessibility and states designed in once, and cut data-fetch latency with caching and lazy-loading across 15+ APIs.</p>
+        <div class="tags"><span>Design systems</span><span>TypeScript</span><span>WCAG 2.1</span><span>Caching</span></div>
+      </div>
+      <div class="res"><div class="k">Outcome</div><div><b>~30%</b><span>less UI dev time</span></div><div><b>50k+</b><span>end users</span></div><div><b>−25%</b><span>data-fetch latency</span></div></div>
+    </article>
+    <article class="item">
+      <div class="num">03</div>
+      <div>
+        <div class="k">Samadhan Associates · 2023 – 2024</div>
+        <h3>Replacing manual office workflows with 8 internal tools</h3>
+        <div class="ctx">Software Engineer, full-stack · React, Laravel, Node, MySQL</div>
+        <p><strong>Problem.</strong> Staff moved the same information between paper, email and spreadsheets every week.</p>
+        <p><strong>What I did.</strong> Mapped the workflows, built 8 modules to replace them, and designed the schema for a 5k+ record document system. Promoted to full-stack in 7 months.</p>
+        <div class="tags"><span>Workflow analysis</span><span>MySQL schema</span><span>Laravel</span></div>
+      </div>
+      <div class="res"><div class="k">Outcome</div><div><b>~10 h</b><span>saved per week</span></div><div><b>−35%</b><span>document load time</span></div></div>
+    </article>
+  </div>
+</div></section>
+
+<section id="building"><div class="wrap">
+  <div class="sh"><h2>What I'm building now</h2><p>Public projects built like production systems: real auth, real failure handling, load-tested, with the design docs published. Status is updated as each one ships.</p></div>
+  <div class="builds">
+    <article class="build lead">
+      <span class="pill on">In design</span>
+      <h3>TicketRush</h3>
+      <p>Event ticketing built for the worst five minutes: a ticket drop where thousands of people pay at once.</p>
+      <ul><li>Seat holds in Redis so two people can't buy the same seat</li><li>Idempotent payments; a gateway crash never double-charges</li><li>Webhook reconciler that refunds any orphaned charge</li><li>Load test target: 10k virtual users, 3k concurrent checkouts</li></ul>
+    </article>
+    <article class="build">
+      <span class="pill">Planned</span>
+      <h3>Ledgerly</h3>
+      <p>The personal finance dashboard, rebuilt as a real multi-user product.</p>
+      <ul><li>Secure sessions, CSRF protection, rate limiting</li><li>Field-level encryption for financial data</li><li>Budget-drift alerts users can act on</li></ul>
+    </article>
+    <article class="build">
+      <span class="pill">Planned</span>
+      <h3>Lens</h3>
+      <p>Multi-tenant analytics for teams, with access control done properly.</p>
+      <ul><li>Role-based access enforced on the server, not the UI</li><li>Audit log of who saw and changed what</li><li>KPI views that combine several data sources</li></ul>
+    </article>
+  </div>
+</div></section>
+
+<section id="approach"><div class="wrap">
+  <div class="sh"><h2>How I work</h2><p>The same loop whether the title says PM, designer or engineer.</p></div>
+  <div class="flow">
+    <div><span class="k">Step 1</span><h3>Find the friction</h3><p>Tickets, usage data and watching people use the product show where it actually breaks.</p></div>
+    <div><span class="k">Step 2</span><h3>Design the system</h3><p>The flow, the data model, the API contract and the failure cases, agreed before code.</p></div>
+    <div><span class="k">Step 3</span><h3>Build it to hold</h3><p>Accessible UI, secure by default, and tested against the load and failures it will meet.</p></div>
+    <div><span class="k">Step 4</span><h3>Measure</h3><p>Tickets, load times and task completion after release feed the next round.</p></div>
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap two">
+  <div>
+    <div class="sh" style="grid-template-columns:1fr;margin-bottom:20px"><h2>Experience</h2></div>
+    <div class="xp">
+      <article><div class="when">2025 – now</div><div><h3>Accenture</h3><p>Associate Software Engineer, frontend / UI.</p></div></article>
+      <article><div class="when">May – Dec 2024</div><div><h3>AgileAptSolutions · ProcurEngine</h3><p>UI Developer, product UI.</p></div></article>
+      <article><div class="when">2023 – 2024</div><div><h3>Samadhan Associates</h3><p>Software Engineer, full-stack. Promoted in 7 months.</p></div></article>
+      <article><div class="when">2020 – 2024</div><div><h3>B.Tech · BIT Mesra, Noida</h3><p>Worked full-time alongside the final years.</p></div></article>
+    </div>
+  </div>
+  <div>
+    <div class="sh" style="grid-template-columns:1fr;margin-bottom:20px"><h2>Toolkit</h2></div>
+    <div class="kit">
+      <div><h4>Product</h4><p>Requirements, user stories, prioritisation, API contracts, Jira</p></div>
+      <div><h4>Design</h4><p>Figma, prototyping, design systems, information architecture, WCAG 2.1</p></div>
+      <div><h4>Frontend</h4><p>React, Next.js, TypeScript, Redux, Tailwind, MUI, Jest</p></div>
+      <div><h4>Backend &amp; data</h4><p>Node.js, Express, REST, MySQL, MongoDB, Python, Pandas</p></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="wrap" id="contact">
+  <div class="cta">
+    <div><h2>Let's build something that <span>holds up.</span></h2><p>Open to Associate PM, design engineer, product / UI-UX and frontend roles. Async-friendly, with overlap for US or European hours.</p></div>
+    <div class="cl">
+      <div class="r"><span id="em">esheet259@gmail.com</span><button class="copy" data-copy="em" type="button">Copy</button></div>
+      <div class="r"><span id="ph">+91 80768 56412</span><button class="copy" data-copy="ph" type="button">Copy</button></div>
+      <div class="r"><a href="https://linkedin.com/in/EsheetVivek" target="_blank" rel="noopener">linkedin.com/in/EsheetVivek ↗</a></div>
+      <div class="r"><a href="https://github.com/EsheetVivek" target="_blank" rel="noopener">github.com/EsheetVivek ↗</a></div>
+    </div>
+  </div>
+  <footer><span>© 2026 Esheet Vivek</span><span>Noida, India · Remote</span></footer>
+</div>
+</main>
+
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy);
+  const ok=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'};
+  try{navigator.clipboard.writeText(el.textContent).then(ok,sel)}catch(e){sel()}
+}));
+</script>
+</body></html>
