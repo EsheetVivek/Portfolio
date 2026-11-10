@@ -1,5 +1,5 @@
 # Portfolio backlog (ordered)
-1. Open Graph / Twitter card meta + a generated social preview image
+1. Generated social preview image (OG tags shipped 2026-11-10)
 2. Responsive pass at 360px: hero diagram legibility, nav, stat strip
 3. Theme toggle (light/dark) that respects system default
 4. Case study pages: one deep page per shipped project (problem, constraints, decisions, outcome)
