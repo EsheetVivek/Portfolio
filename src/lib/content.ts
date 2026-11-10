@@ -108,7 +108,7 @@ export const EXPERIENCE = [
   { when: "2025 – now", org: "Accenture", what: "Associate Software Engineer, frontend / UI." },
   { when: "May – Dec 2024", org: "AgileAptSolutions · ProcurEngine", what: "UI Developer, product UI." },
   { when: "2023 – 2024", org: "Samadhan Associates", what: "Software Engineer, full-stack. Promoted in 7 months." },
-  { when: "2020 – 2024", org: "Bachelor of Computer Applications (BCA) · BIT Mesra, Noida", what: "Worked full-time alongside the final years." },
+  { when: "2020 – 2024", org: "Bachelors in Computer Application · BIT Mesra, Noida", what: "Worked full-time alongside the final years." },
 ];
 
 export const TOOLKIT = [
