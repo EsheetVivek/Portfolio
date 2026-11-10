@@ -89,10 +89,12 @@ export const WORK: CaseStudy[] = [
 ];
 
 export const BUILDING = [
-  { name: "Ledgerly", status: "Planned", line: "The personal finance dashboard, rebuilt as a real multi-user product.",
-    points: ["Secure sessions, CSRF protection, rate limiting", "Field-level encryption for financial data", "Budget-drift alerts users can act on"] },
-  { name: "Lens", status: "Planned", line: "Multi-tenant analytics for teams, with access control done properly.",
-    points: ["Role-based access enforced on the server, not the UI", "Audit log of who saw and changed what", "KPI views that combine several data sources"] },
+  { name: "Resolve", status: "Next", line: "AI support drafts that can't promise refunds or policy the company won't honour.",
+    points: ["Every sentence cites approved policy, or it's cut", "Commitments routed to an agent allowed to make them", "Prompt-injection attacks in the test suite"] },
+  { name: "Paycheck", status: "Planned", line: "Stops fake UPI payment screenshots at the shop counter.",
+    points: ["Paid only when the merchant's own provider confirms the exact bill", "Replayed QR codes and partial payments caught", "Green / amber / red verdict a cashier can trust in seconds"] },
+  { name: "Lens", status: "Planned", line: "Ask your data questions without ever seeing another team's rows.",
+    points: ["AI-written SQL parsed and allow-listed before it runs", "Row-level security in Postgres, not in the prompt", "Red-team suite that tries to cross tenants"] },
 ];
 
 export const PROCESS = [
