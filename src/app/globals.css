@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* esheet.os: warm afternoon desktop in light, late-night desk in dark. Signal orange is the one
+   accent, kept from the previous site so the brand carries over. */
+:root {
+  --wall-1: #f6d7b8; --wall-2: #f2b48c; --wall-3: #efe6d8; --wall-4: #c9d6cf;
+  --win: #fffcf6; --win-2: #f6f1e7; --chrome: #f1ebdf; --ink: #1d1a16; --muted: #6a6158; --line: #e5ddcf;
+  --accent: #e8501a; --accent-ink: #ffffff; --accent-soft: #fde6da; --ok: #2f7a55;
+  --glass: rgb(255 252 246 / 0.62); --glass-line: rgb(255 255 255 / 0.65);
+  --shadow-win: 0 1px 0 rgb(255 255 255 / .7) inset, 0 30px 60px -20px rgb(60 30 10 / .35), 0 12px 24px -12px rgb(60 30 10 / .25);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --wall-1:#2a2140;--wall-2:#3b2236;--wall-3:#14141c;--wall-4:#1b2a33;--win:#1d1c22;--win-2:#24232b;--chrome:#26252d;--ink:#f2eee7;--muted:#a59d93;--line:#34323b;--accent:#ff6a33;--accent-ink:#1a0b04;--accent-soft:#3a2219;--ok:#6cc596;--glass:rgb(30 29 36 / .6);--glass-line:rgb(255 255 255 / .08);--shadow-win:0 1px 0 rgb(255 255 255 / .05) inset,0 30px 60px -20px rgb(0 0 0 / .7),0 12px 24px -12px rgb(0 0 0 / .5);color-scheme:dark; } }
+:root[data-theme="dark"] { --wall-1:#2a2140;--wall-2:#3b2236;--wall-3:#14141c;--wall-4:#1b2a33;--win:#1d1c22;--win-2:#24232b;--chrome:#26252d;--ink:#f2eee7;--muted:#a59d93;--line:#34323b;--accent:#ff6a33;--accent-ink:#1a0b04;--accent-soft:#3a2219;--ok:#6cc596;--glass:rgb(30 29 36 / .6);--glass-line:rgb(255 255 255 / .08);--shadow-win:0 1px 0 rgb(255 255 255 / .05) inset,0 30px 60px -20px rgb(0 0 0 / .7),0 12px 24px -12px rgb(0 0 0 / .5);color-scheme:dark; }
+
+@theme inline {
+  --color-win: var(--win); --color-win-2: var(--win-2); --color-chrome: var(--chrome); --color-ink: var(--ink);
+  --color-muted: var(--muted); --color-line: var(--line); --color-accent: var(--accent); --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft); --color-ok: var(--ok); --color-glass: var(--glass); --color-glass-line: var(--glass-line);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+  --shadow-win: var(--shadow-win);
+}
+
+html, body { height: 100%; }
+body { background: var(--wall-3); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wallpaper {
+  background:
+    radial-gradient(60% 70% at 15% 20%, var(--wall-1), transparent 70%),
+    radial-gradient(50% 60% at 85% 15%, var(--wall-2), transparent 70%),
+    radial-gradient(70% 60% at 70% 95%, var(--wall-4), transparent 70%),
+    var(--wall-3);
+}
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.glass { background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6); }
+.scroll-soft { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+
+@utility k { @apply font-mono text-[11px] uppercase tracking-[0.14em] text-muted; }
+@utility chip { @apply inline-flex items-center rounded-full border border-line bg-win-2 px-2.5 py-0.5 font-mono text-[11px] text-muted; }
+@utility btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium transition active:scale-[.97]; }
+@utility btn-main { @apply btn bg-ink text-win hover:bg-accent hover:text-accent-ink; }
+@utility btn-alt { @apply btn border border-line bg-win hover:border-ink; }
+@utility a { @apply font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
