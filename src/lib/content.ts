@@ -89,7 +89,7 @@ export const WORK: CaseStudy[] = [
 ];
 
 export const BUILDING = [
-  { name: "Resolve", status: "Next", line: "AI support drafts that can't promise refunds or policy the company won't honour.",
+  { name: "Resolve", status: "In progress · 2 of 8", line: "AI support drafts that can't promise refunds or policy the company won't honour. Live: resolve-one-sable.vercel.app",
     points: ["Every sentence cites approved policy, or it's cut", "Commitments routed to an agent allowed to make them", "Prompt-injection attacks in the test suite"] },
   { name: "Paycheck", status: "Planned", line: "Stops fake UPI payment screenshots at the shop counter.",
     points: ["Paid only when the merchant's own provider confirms the exact bill", "Replayed QR codes and partial payments caught", "Green / amber / red verdict a cashier can trust in seconds"] },
