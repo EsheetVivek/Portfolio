@@ -98,7 +98,7 @@ export function TicketRushApp() {
           </ul>
         </section>
         <div className="flex flex-wrap gap-2">{TICKETRUSH.stack.map((s) => <span key={s} className="chip">{s}</span>)}</div>
-        <p className="text-sm text-muted">Results in <Out href={TICKETRUSH.results} className="a inline-flex items-center gap-0.5">docs/results</Out>. {TICKETRUSH.next}</p>
+        <p className="text-sm text-muted">All results, misses included: <Out href={TICKETRUSH.live_results} className="a inline-flex items-center gap-0.5">live results page</Out> · <Out href={TICKETRUSH.results} className="a inline-flex items-center gap-0.5">raw write-ups</Out>. {TICKETRUSH.next}</p>
       </div>
     </div>
   );
